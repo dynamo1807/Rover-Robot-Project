@@ -1,0 +1,43 @@
+name: Bug report
+description: Report a reproducible hardware, firmware, documentation, or test defect.
+title: "[BUG] "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Observed problem
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      placeholder: "1. Hardware/firmware revision\n2. Setup\n3. Action\n4. Observation"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Add logs, measurements, images, or scope captures without secrets or personal data.
+  - type: dropdown
+    id: safety
+    attributes:
+      label: Safety impact
+      options:
+        - None known
+        - Motion or actuator risk
+        - Electrical or thermal risk
+        - Battery risk
+        - Unknown; needs triage
+    validations:
+      required: true
+

@@ -1,0 +1,41 @@
+name: Firmware task
+description: Plan an embedded software, control, test, or tooling task.
+title: "[FW] "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and objective
+    validations:
+      required: true
+  - type: textarea
+    id: interfaces
+    attributes:
+      label: Interfaces and constraints
+      description: Include timing, units, hardware assumptions, and dependencies.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      placeholder: "- [ ] Measurable behavior or test result"
+    validations:
+      required: true
+  - type: textarea
+    id: tests
+    attributes:
+      label: Test plan
+      description: Describe host tests, target tests, telemetry, and fault injection.
+    validations:
+      required: true
+  - type: textarea
+    id: safety
+    attributes:
+      label: Safety impact
+      description: State how failures affect actuator outputs and the safe state.
+    validations:
+      required: true
+

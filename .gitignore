@@ -1,0 +1,48 @@
+# Operating-system and editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+
+# Generic build outputs
+build/
+out/
+Debug/
+Release/
+cmake-build-*/
+*.o
+*.obj
+*.elf
+*.hex
+*.bin
+*.map
+
+# STM32CubeIDE local/generated state
+.metadata/
+RemoteSystemsTempFiles/
+
+# KiCad local state, locks, backups, and autosaves
+*-backups/
+_autosave-*
+*.bak
+*.bck
+*.kicad_prl
+*.kicad_sch-bak
+*.kicad_pcb-bak
+*.lck
+~*.lck
+
+# Logs and temporary measurements
+*.log
+tmp/
+temp/
+
+# Secrets and local environment files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
