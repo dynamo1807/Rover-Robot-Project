@@ -71,8 +71,8 @@ flowchart LR
 | Integrated verification | Not started |
 
 The [roadmap](docs/ROADMAP.md) defines phase exit criteria. The
-[backlog](docs/BACKLOG.md) is the planning source of truth until its items are
-linked to GitHub Issues.
+[backlog](docs/BACKLOG.md) is the planning source of truth and links every work
+package to its GitHub Issue.
 
 ## Repository structure
 
