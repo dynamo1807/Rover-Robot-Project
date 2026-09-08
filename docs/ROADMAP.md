@@ -1,95 +1,92 @@
-# Project Roadmap
+# Projekt-Roadmap
 
-Progress is based on evidence and exit criteria, not only on task completion.
-Later milestones may be refined as measurements replace current assumptions.
+Der Fortschritt richtet sich nach Nachweisen und Abschlusskriterien, nicht nur
+nach erledigten Aufgaben. Spätere Meilensteine können präzisiert werden, wenn
+Messungen die aktuellen Annahmen ersetzen.
 
-## M0 — Requirements and design baseline
+## M0 — Anforderungen und Entwurfsbasis
 
-**Outcome:** the first drive-base scope is unambiguous and technically
-reviewable.
+**Ergebnis:** Der Umfang der ersten Antriebsbasis ist eindeutig und technisch begutachtbar.
 
-Exit criteria:
+Abschlusskriterien:
 
-- functional and safety requirements are documented;
-- current architecture and interfaces are documented;
-- accepted and open decisions are visible;
-- P0 backlog items have owners or a clear next action;
-- no future autonomy feature is required to validate the drive base.
+- Funktions- und Sicherheitsanforderungen sind dokumentiert;
+- aktuelle Architektur und Schnittstellen sind dokumentiert;
+- angenommene und offene Entscheidungen sind sichtbar;
+- P0-Backlog-Einträge haben Verantwortliche oder eine eindeutige nächste Aktion;
+- keine künftige Autonomiefunktion ist zur Validierung der Antriebsbasis erforderlich.
 
-## M1 — Bench-validated drivetrain
+## M1 — Am Prüfstand validierter Antrieb
 
-**Outcome:** one representative motor channel and both encoder channels are
-understood before custom-PCB release.
+**Ergebnis:** Ein repräsentativer Motorkanal und beide Encoderkanäle sind vor
+Freigabe der eigenen Platine verstanden.
 
-Exit criteria:
+Abschlusskriterien:
 
-- selected motors have measured electrical, speed, and encoder data;
-- DRV8872 current regulation and thermal margin are demonstrated;
-- a G431 development board drives a motor through the intended command scheme;
-- encoder direction and maximum-speed capture are verified;
-- the power architecture and protection concept are frozen.
+- elektrische Kenndaten, Drehzahl und Encoderdaten der ausgewählten Motoren wurden gemessen;
+- Stromregelung und thermische Reserve des DRV8872 wurden nachgewiesen;
+- ein G431-Entwicklungsboard steuert einen Motor mit dem vorgesehenen Befehlsschema;
+- Encoderrichtung und Erfassung bei Höchstdrehzahl wurden geprüft;
+- Stromversorgungsarchitektur und Schutzkonzept sind festgelegt.
 
-## M2 — PCB release
+## M2 — Platinenfreigabe
 
-**Outcome:** reviewable manufacturing data for controller PCB revision A.
+**Ergebnis:** Begutachtbare Fertigungsdaten für Controller-Platine Revision A.
 
-Exit criteria:
+Abschlusskriterien:
 
-- MCU pin/timer allocation is frozen;
-- schematic review and ERC are complete;
-- layout review and DRC are complete;
-- BOM, alternatives, fabrication outputs, and assembly notes are generated;
-- bring-up sequence and test points are documented.
+- MCU-Pin- und Timerzuordnung ist festgelegt;
+- Schaltplanprüfung und ERC sind abgeschlossen;
+- Layoutprüfung und DRC sind abgeschlossen;
+- Stückliste, Alternativen, Fertigungsdaten und Bestückungshinweise wurden erzeugt;
+- Inbetriebnahmereihenfolge und Messpunkte sind dokumentiert.
 
-## M3 — Controller bring-up
+## M3 — Inbetriebnahme des Controllers
 
-**Outcome:** an assembled PCB is electrically safe and controllable.
+**Ergebnis:** Eine bestückte Platine ist elektrisch sicher und steuerbar.
 
-Exit criteria:
+Abschlusskriterien:
 
-- resistance checks and current-limited first power-up pass;
-- all rails, reset, clock, SWD, and UART pass;
-- both motor channels and both encoders pass open-loop tests;
-- fault inputs and safe-stop behavior pass;
-- bring-up deviations are recorded and schematic fixes are back-annotated.
+- Widerstandsprüfungen und erste Inbetriebnahme mit Strombegrenzung sind erfolgreich;
+- alle Versorgungen, Reset, Takt, SWD und UART funktionieren;
+- beide Motorkanäle und Encoder bestehen die ungeregelten Prüfungen;
+- Fehlereingänge und sicheres Stoppverhalten funktionieren;
+- Abweichungen der Inbetriebnahme sind dokumentiert und Schaltplankorrekturen zurückgeführt.
 
-## M4 — Closed-loop drive base
+## M4 — Geregelte Antriebsbasis
 
-**Outcome:** two-wheel speed control operates reliably under representative
-load.
+**Ergebnis:** Die Drehzahlregelung beider Räder arbeitet unter repräsentativer Last zuverlässig.
 
-Exit criteria:
+Abschlusskriterien:
 
-- reproducible firmware builds and basic automated tests exist;
-- both wheel-speed estimators are calibrated;
-- PID response meets defined tracking and stability requirements;
-- command timeout, watchdog, and injected-fault tests pass;
-- thermal and runtime tests under representative load pass.
+- reproduzierbare Firmware-Builds und grundlegende automatisierte Tests existieren;
+- beide Raddrehzahlschätzer sind kalibriert;
+- die PID-Antwort erfüllt festgelegte Nachführ- und Stabilitätsanforderungen;
+- Befehlszeitüberschreitung, Watchdog und Fehlerinjektionstests funktionieren;
+- Thermik- und Laufzeittests unter repräsentativer Last sind erfolgreich.
 
-## M5 — Mechanical integration
+## M5 — Mechanische Integration
 
-**Outcome:** the verified electronics and drivetrain operate in the printed
-chassis.
+**Ergebnis:** Validierte Elektronik und Antrieb arbeiten im gedruckten Chassis.
 
-Exit criteria:
+Abschlusskriterien:
 
-- CAD and print settings are versioned;
-- battery, PCB, motors, wiring, and strain relief are safely retained;
-- service access and cooling are adequate;
-- straight-line, turning, braking, and endurance tests pass.
+- CAD-Daten und Druckeinstellungen sind versioniert;
+- Batterie, Platine, Motoren, Verkabelung und Zugentlastung sind sicher befestigt;
+- Wartungszugang und Kühlung sind ausreichend;
+- Geradeausfahrt, Wenden, Bremsen und Dauertest sind erfolgreich.
 
-## M6 — Sensor-ready rover
+## M6 — Sensorbereiter Rover
 
-**Outcome:** the drive base exposes stable interfaces for autonomy experiments.
+**Ergebnis:** Die Antriebsbasis stellt stabile Schnittstellen für Autonomieexperimente bereit.
 
-Exit criteria:
+Abschlusskriterien:
 
-- IMU and ToF interfaces are electrically and mechanically validated;
-- timestamped telemetry and basic odometry are available;
-- sensor faults do not compromise safe manual/bench operation;
-- the next autonomy milestone has explicit requirements.
+- IMU- und ToF-Schnittstellen sind elektrisch und mechanisch validiert;
+- Telemetrie mit Zeitstempeln und grundlegende Odometrie sind verfügbar;
+- Sensorfehler beeinträchtigen den sicheren manuellen Betrieb oder Prüfstandsbetrieb nicht;
+- der nächste Autonomiemeilenstein besitzt eindeutige Anforderungen.
 
-Potential later work includes obstacle avoidance, sensor fusion, wireless
-control, camera integration, mapping/SLAM, and a manipulator. These are not
-commitments until promoted into the active backlog.
-
+Mögliche spätere Arbeiten umfassen Hindernisvermeidung, Sensorfusion,
+Funksteuerung, Kameraintegration, Kartierung/SLAM und einen Manipulator. Sie
+gelten erst dann als zugesagt, wenn sie in den aktiven Backlog aufgenommen wurden.

@@ -1,25 +1,25 @@
-# Engineering Decision Log
+# Technisches Entscheidungsprotokoll
 
-This lightweight decision log records the design baseline without pretending
-that unvalidated assumptions are final. A decision moves from **Proposed** to
-**Accepted** only when its consequences and required evidence are understood.
+Dieses kompakte Protokoll hält die Entwurfsbasis fest, ohne unbestätigte
+Annahmen als endgültig darzustellen. Eine Entscheidung wechselt erst von
+**Vorgeschlagen** zu **Angenommen**, wenn ihre Folgen und die erforderlichen
+Nachweise verstanden sind.
 
-| ID | Status | Decision | Rationale | Revisit trigger |
+| ID | Status | Entscheidung | Begründung | Anlass zur Neubewertung |
 | --- | --- | --- | --- | --- |
-| D-001 | Accepted | Use STM32G431 as the controller family; target STM32G431CBT6 on the custom PCB | Motor-control timers, analog capability, performance, and a practical Nucleo prototype path | Pin/resource conflict or unavailable part |
-| D-002 | Accepted | Use one DRV8872 per motor | Independent bidirectional channels with current regulation and fault reporting | Measured motor/thermal limits fail |
-| D-003 | Proposed | Use two 12 V GA25/JGA25-370 class metal gearmotors with AB Hall encoders at approximately 100–130 rpm | Appropriate scale, encoder availability, and simple differential drive | MR-002 measurements or chassis requirements fail |
-| D-004 | Accepted | Use differential drive for the first platform | Mechanically simple and compatible with independent wheel-speed control | Terrain or payload requirement changes |
-| D-005 | Accepted | Validate with a G431 development board before ordering the custom PCB | Reduces simultaneous hardware and firmware uncertainty | None; this is a risk-control measure |
-| D-006 | Proposed | Reserve I2C/GPIO interfaces for IMU and ToF expansion | Supports later autonomy without coupling it to initial drive-base success | Pin/power budget cannot support it |
-| D-007 | Open | Battery chemistry, cell count, protection, charging, and regulation | Insufficient verified load and runtime data | Resolve in MR-004 |
-| D-008 | Open | Firmware build system and STM32 HAL/LL boundary | Reproducibility and testability requirements need evaluation | Resolve in MR-011 |
+| D-001 | Angenommen | STM32G431 als Controllerfamilie verwenden; auf der eigenen Platine den STM32G431CBT6 vorsehen | Motorsteuerungs-Timer, Analogfunktionen, Leistung und ein praktikabler Nucleo-Prototyppfad | Konflikt bei Pins/Ressourcen oder Bauteil nicht verfügbar |
+| D-002 | Angenommen | Einen DRV8872 pro Motor verwenden | Unabhängige bidirektionale Kanäle mit Stromregelung und Fehlermeldung | Gemessene Motor- oder Thermikgrenzen werden nicht eingehalten |
+| D-003 | Vorgeschlagen | Zwei 12-V-Metallgetriebemotoren der Klasse GA25/JGA25-370 mit AB-Hall-Encodern und etwa 100–130 U/min verwenden | Passende Baugröße, Encoderverfügbarkeit und einfacher Differentialantrieb | Messungen aus MR-002 oder Chassisanforderungen werden nicht erfüllt |
+| D-004 | Angenommen | Für die erste Plattform einen Differentialantrieb verwenden | Mechanisch einfach und mit unabhängiger Raddrehzahlregelung vereinbar | Gelände- oder Nutzlastanforderung ändert sich |
+| D-005 | Angenommen | Vor Bestellung der eigenen Platine mit einem G431-Entwicklungsboard validieren | Verringert gleichzeitige Unsicherheit bei Hardware und Firmware | Keiner; dies ist eine Maßnahme zur Risikobegrenzung |
+| D-006 | Vorgeschlagen | I2C-/GPIO-Schnittstellen für IMU- und ToF-Erweiterungen reservieren | Ermöglicht spätere Autonomie, ohne sie an den ersten Erfolg der Antriebsbasis zu koppeln | Pin- oder Strombudget reicht nicht aus |
+| D-007 | Offen | Batteriechemie, Zellenzahl, Schutz, Laden und Regelung | Verifizierte Last- und Laufzeitdaten reichen noch nicht aus | In MR-004 klären |
+| D-008 | Offen | Firmware-Buildsystem und Grenze zwischen STM32 HAL und LL | Anforderungen an Reproduzierbarkeit und Prüfbarkeit müssen bewertet werden | In MR-011 klären |
 
-## Decision procedure
+## Entscheidungsverfahren
 
-1. State the decision and viable alternatives.
-2. Record constraints, evidence, and consequences.
-3. Link the responsible GitHub Issue.
-4. Mark the decision Accepted only after its acceptance criteria pass.
-5. When superseded, retain the old row and link the replacement decision.
-
+1. Entscheidung und brauchbare Alternativen benennen.
+2. Randbedingungen, Nachweise und Folgen dokumentieren.
+3. Das zuständige GitHub-Issue verknüpfen.
+4. Die Entscheidung erst nach Erfüllung ihrer Abnahmekriterien als angenommen markieren.
+5. Bei Ablösung den alten Eintrag erhalten und die neue Entscheidung verknüpfen.

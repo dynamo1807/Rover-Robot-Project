@@ -1,5 +1,5 @@
-name: Hardware task
-description: Plan an electronics, PCB, power, or mechanical engineering task.
+name: Hardware-Aufgabe
+description: Eine Aufgabe zu Elektronik, Platine, Stromversorgung oder Mechanik planen.
 title: "[HW] "
 labels:
   - enhancement
@@ -7,37 +7,36 @@ body:
   - type: textarea
     id: problem
     attributes:
-      label: Problem and objective
-      description: State the engineering problem and the desired outcome.
+      label: Problem und Ziel
+      description: Das technische Problem und das gewünschte Ergebnis beschreiben.
     validations:
       required: true
   - type: textarea
     id: inputs
     attributes:
-      label: Inputs and dependencies
-      description: Link requirements, decisions, datasheets, measurements, and blocking issues.
+      label: Eingaben und Abhängigkeiten
+      description: Anforderungen, Entscheidungen, Datenblätter, Messungen und blockierende Issues verknüpfen.
     validations:
       required: true
   - type: textarea
     id: acceptance
     attributes:
-      label: Acceptance criteria
-      description: Provide measurable criteria using a Markdown checklist.
-      placeholder: "- [ ] Criterion with value and unit"
+      label: Abnahmekriterien
+      description: Messbare Kriterien als Markdown-Checkliste angeben.
+      placeholder: "- [ ] Kriterium mit Wert und Einheit"
     validations:
       required: true
   - type: textarea
     id: verification
     attributes:
-      label: Verification and evidence
-      description: Explain the calculation, review, inspection, or test that will prove completion.
+      label: Verifikation und Nachweise
+      description: Erklären, welche Berechnung, Begutachtung, Inspektion oder Prüfung die Fertigstellung belegt.
     validations:
       required: true
   - type: textarea
     id: safety
     attributes:
-      label: Safety and failure modes
-      description: Identify credible hazards, limits, and precautions.
+      label: Sicherheit und Fehlerarten
+      description: Plausible Gefahren, Grenzwerte und Vorsichtsmaßnahmen benennen.
     validations:
       required: true
-

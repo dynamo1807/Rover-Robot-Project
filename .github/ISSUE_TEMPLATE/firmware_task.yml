@@ -1,5 +1,5 @@
-name: Firmware task
-description: Plan an embedded software, control, test, or tooling task.
+name: Firmware-Aufgabe
+description: Eine Aufgabe zu eingebetteter Software, Regelung, Tests oder Werkzeugen planen.
 title: "[FW] "
 labels:
   - enhancement
@@ -7,35 +7,34 @@ body:
   - type: textarea
     id: problem
     attributes:
-      label: Problem and objective
+      label: Problem und Ziel
     validations:
       required: true
   - type: textarea
     id: interfaces
     attributes:
-      label: Interfaces and constraints
-      description: Include timing, units, hardware assumptions, and dependencies.
+      label: Schnittstellen und Randbedingungen
+      description: Zeitverhalten, Einheiten, Hardwareannahmen und Abhängigkeiten angeben.
     validations:
       required: true
   - type: textarea
     id: acceptance
     attributes:
-      label: Acceptance criteria
-      placeholder: "- [ ] Measurable behavior or test result"
+      label: Abnahmekriterien
+      placeholder: "- [ ] Messbares Verhalten oder Prüfergebnis"
     validations:
       required: true
   - type: textarea
     id: tests
     attributes:
-      label: Test plan
-      description: Describe host tests, target tests, telemetry, and fault injection.
+      label: Prüfplan
+      description: Host- und Zielsystemtests, Telemetrie und Fehlerinjektion beschreiben.
     validations:
       required: true
   - type: textarea
     id: safety
     attributes:
-      label: Safety impact
-      description: State how failures affect actuator outputs and the safe state.
+      label: Sicherheitsauswirkung
+      description: Angeben, wie sich Fehler auf die Aktuatorausgänge und den sicheren Zustand auswirken.
     validations:
       required: true
-

@@ -1,13 +1,13 @@
 # Firmware
 
-Production firmware has not been initialized yet. MR-011 selects the build
-system and establishes a reproducible STM32G431 project before feature work
-begins.
+Die produktive Firmware wurde noch nicht initialisiert. MR-011 wählt das
+Buildsystem aus und richtet ein reproduzierbares STM32G431-Projekt ein, bevor
+die Funktionsentwicklung beginnt.
 
-The intended layers, safety state machine, coding rules, and verification
-strategy are documented in [`docs/FIRMWARE.md`](../docs/FIRMWARE.md).
+Die vorgesehenen Schichten, der Sicherheitszustandsautomat, die
+Programmierrichtlinien und die Verifikationsstrategie sind in
+[`docs/FIRMWARE.md`](../docs/FIRMWARE.md) dokumentiert.
 
-Do not commit only generated IDE output. The repository must retain the inputs
-needed to reproduce a clean build, including toolchain version and generation
-boundaries.
-
+Nicht ausschließlich erzeugte IDE-Ausgaben committen. Das Repository muss die
+Eingaben enthalten, die für einen sauberen, reproduzierbaren Build erforderlich
+sind, einschließlich Werkzeugkettenversion und Grenzen des generierten Codes.

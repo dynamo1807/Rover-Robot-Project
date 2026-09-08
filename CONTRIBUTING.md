@@ -1,80 +1,82 @@
-# Contributing
+# Mitwirken
 
-Contributions should improve the rover while preserving traceability between a
-problem, a design decision, the changed source, and verification evidence.
+Beiträge sollen den Rover verbessern und zugleich die Nachvollziehbarkeit
+zwischen Problem, Entwurfsentscheidung, geändertem Quellstand und
+Verifikationsnachweis erhalten.
 
-## Workflow
+## Arbeitsablauf
 
-1. Open or select a GitHub Issue with measurable acceptance criteria.
-2. Confirm that blocking decisions and dependencies are resolved.
-3. Create a focused branch such as `hardware/mr-007-schematic-review` or
-   `firmware/mr-013-encoder-driver`.
-4. Commit source files and documentation in small, coherent changes.
-5. Verify the change using the applicable checklist or test plan.
-6. Open a pull request that links the issue and includes evidence.
+1. Ein GitHub-Issue mit messbaren Abnahmekriterien erstellen oder auswählen.
+2. Sicherstellen, dass blockierende Entscheidungen und Abhängigkeiten geklärt sind.
+3. Einen fokussierten Branch wie `hardware/mr-007-schematic-review` oder
+   `firmware/mr-013-encoder-driver` anlegen.
+4. Quelldateien und Dokumentation in kleinen, zusammenhängenden Änderungen committen.
+5. Die Änderung anhand der zutreffenden Checkliste oder des Prüfplans verifizieren.
+6. Einen Pull Request eröffnen, der das Issue verknüpft und Nachweise enthält.
 
-Direct commits to `main` should be limited to repository administration or an
-initial project baseline. Product changes should use reviewable branches.
+Direkte Commits auf `main` sollten auf die Repository-Verwaltung oder eine
+anfängliche Projektbasis beschränkt bleiben. Produktänderungen sollen über
+begutachtbare Branches erfolgen.
 
-## Commit messages
+## Commit-Nachrichten
 
-Use an imperative subject and an optional scope:
+Einen imperativen Betreff mit optionalem Geltungsbereich verwenden:
 
 ```text
-docs: establish architecture and verification baseline
-hardware: add DRV8872 current-limit calculation
-firmware: implement quadrature encoder capture
-mechanical: add motor mount revision B
+docs: Architektur- und Verifikationsbasis festlegen
+hardware: Strombegrenzung des DRV8872 berechnen
+firmware: Quadratur-Encodererfassung implementieren
+mechanical: Motorhalterung Revision B ergänzen
 ```
 
-Mention the work-item ID in the body when the connection is not obvious.
+Die Arbeitspaket-ID im Text nennen, wenn der Zusammenhang nicht eindeutig ist.
 
-## Source-of-truth rules
+## Regeln für verbindliche Quelldaten
 
-- Commit editable KiCad, CAD, and firmware sources.
-- Do not replace source with screenshots or exported PDFs.
-- Generated manufacturing artifacts belong in a clearly named release folder
-  and must identify the source revision that produced them.
-- Record measured values with units, setup, equipment, and uncertainty where it
-  affects a decision.
-- Never commit credentials, private SSH keys, tokens, or personal configuration.
+- Editierbare KiCad-, CAD- und Firmware-Quellen committen.
+- Quelldaten nicht durch Bildschirmfotos oder exportierte PDFs ersetzen.
+- Erzeugte Fertigungsdaten gehören in einen eindeutig benannten Release-Ordner
+  und müssen die Quellrevision nennen, aus der sie erzeugt wurden.
+- Messwerte mit Einheit, Aufbau, Messgerät und – falls entscheidungsrelevant –
+  Messunsicherheit dokumentieren.
+- Niemals Zugangsdaten, private SSH-Schlüssel, Token oder persönliche
+  Konfiguration committen.
 
-## Hardware review checklist
+## Checkliste für die Hardwareprüfung
 
-- [ ] Requirements and assumptions are linked.
-- [ ] Datasheet limits are checked at minimum and maximum conditions.
-- [ ] Power and current budgets use worst-case values.
-- [ ] Connector pinouts and polarity are documented.
-- [ ] ERC/DRC output contains no unexplained item.
-- [ ] Test points and bring-up access are adequate.
-- [ ] BOM entries are orderable and include alternatives where practical.
-- [ ] The verification or bring-up plan covers the changed circuitry.
+- [ ] Anforderungen und Annahmen sind verknüpft.
+- [ ] Datenblattgrenzen wurden für Minimal- und Maximalbedingungen geprüft.
+- [ ] Leistungs- und Strombilanzen verwenden ungünstigste Fallwerte.
+- [ ] Steckerbelegungen und Polaritäten sind dokumentiert.
+- [ ] Die ERC-/DRC-Ausgabe enthält keine ungeklärten Meldungen.
+- [ ] Testpunkte und Zugänge für die Inbetriebnahme sind ausreichend.
+- [ ] Stücklisteneinträge sind bestellbar und enthalten nach Möglichkeit Alternativen.
+- [ ] Der Verifikations- oder Inbetriebnahmeplan deckt die geänderte Schaltung ab.
 
-## Firmware review checklist
+## Checkliste für die Firmwareprüfung
 
-- [ ] Public interfaces and units are clear.
-- [ ] Error paths and initialization failures are handled.
-- [ ] Actuator outputs are bounded and default safe.
-- [ ] Interrupt paths are bounded and non-blocking.
-- [ ] Relevant host or target tests pass.
-- [ ] Compiler warnings are resolved.
-- [ ] Telemetry or evidence demonstrates target behavior where required.
-- [ ] Documentation reflects changed behavior or timing.
+- [ ] Öffentliche Schnittstellen und Einheiten sind eindeutig.
+- [ ] Fehlerpfade und Initialisierungsfehler werden behandelt.
+- [ ] Aktorausgänge sind begrenzt und standardmäßig sicher.
+- [ ] Interruptpfade sind zeitlich begrenzt und nicht blockierend.
+- [ ] Relevante Host- oder Zielsystemtests sind erfolgreich.
+- [ ] Compilerwarnungen sind behoben.
+- [ ] Telemetrie oder andere Nachweise zeigen bei Bedarf das Verhalten auf dem Zielsystem.
+- [ ] Die Dokumentation bildet geändertes Verhalten oder Timing ab.
 
-## Definition of Done
+## Fertigstellungskriterien
 
-A change is done when:
+Eine Änderung ist fertig, wenn:
 
-- all issue acceptance criteria pass;
-- required source, calculations, and evidence are committed or linked;
-- affected documentation and decisions are current;
-- review comments are resolved;
-- verification is reproducible;
-- no known P0 safety or release-blocking defect remains.
+- alle Abnahmekriterien des Issues erfüllt sind;
+- erforderliche Quellen, Berechnungen und Nachweise committet oder verknüpft sind;
+- betroffene Dokumentation und Entscheidungen aktuell sind;
+- Kommentare aus der Begutachtung geklärt sind;
+- die Verifikation reproduzierbar ist;
+- kein bekannter P0-Sicherheitsfehler oder veröffentlichungsblockierender Defekt besteht.
 
-## Reporting safety concerns
+## Sicherheitsbedenken melden
 
-Open an issue for design-level safety concerns that do not expose a security
-secret. Do not include private credentials or sensitive personal information in
-an issue, commit, or test log.
-
+Für Sicherheitsbedenken auf Entwurfsebene, die kein Sicherheitsgeheimnis
+offenlegen, ein Issue erstellen. Keine privaten Zugangsdaten oder sensiblen
+personenbezogenen Informationen in Issues, Commits oder Prüfprotokolle aufnehmen.

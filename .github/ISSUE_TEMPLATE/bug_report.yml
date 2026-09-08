@@ -1,43 +1,43 @@
-name: Bug report
-description: Report a reproducible hardware, firmware, documentation, or test defect.
-title: "[BUG] "
+name: Fehlerbericht
+description: Einen reproduzierbaren Fehler in Hardware, Firmware, Dokumentation oder Tests melden.
+title: "[FEHLER] "
 labels:
   - bug
 body:
   - type: textarea
     id: description
     attributes:
-      label: Observed problem
+      label: Beobachtetes Problem
     validations:
       required: true
   - type: textarea
     id: reproduce
     attributes:
-      label: Reproduction steps
-      placeholder: "1. Hardware/firmware revision\n2. Setup\n3. Action\n4. Observation"
+      label: Schritte zur Reproduktion
+      placeholder: "1. Hardware-/Firmware-Revision\n2. Aufbau\n3. Aktion\n4. Beobachtung"
     validations:
       required: true
   - type: textarea
     id: expected
     attributes:
-      label: Expected behavior
+      label: Erwartetes Verhalten
     validations:
       required: true
   - type: textarea
     id: evidence
     attributes:
-      label: Evidence
-      description: Add logs, measurements, images, or scope captures without secrets or personal data.
+      label: Nachweise
+      description: Protokolle, Messungen, Bilder oder Oszilloskopaufnahmen ohne Geheimnisse oder personenbezogene Daten ergänzen.
   - type: dropdown
     id: safety
     attributes:
-      label: Safety impact
+      label: Sicherheitsauswirkung
       options:
-        - None known
-        - Motion or actuator risk
-        - Electrical or thermal risk
-        - Battery risk
-        - Unknown; needs triage
+        - Keine bekannt
+        - Bewegungs- oder Aktuatorrisiko
+        - Elektrisches oder thermisches Risiko
+        - Akkurisiko
+        - Unbekannt; muss bewertet werden
     validations:
       required: true
 

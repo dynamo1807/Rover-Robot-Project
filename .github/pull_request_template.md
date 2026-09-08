@@ -1,30 +1,29 @@
-## Summary
+## Zusammenfassung
 
-Describe the problem and the chosen solution.
+Problem und gewählte Lösung beschreiben.
 
-Closes: <!-- #issue -->
+Schließt: <!-- #issue -->
 
-## Scope
+## Umfang
 
-- Included:
-- Explicitly not included:
+- Enthalten:
+- Ausdrücklich nicht enthalten:
 
-## Verification
+## Verifikation
 
-- [ ] Acceptance criteria pass.
-- [ ] Relevant automated checks pass.
-- [ ] Hardware evidence or test logs are linked where applicable.
-- [ ] ERC/DRC or compiler warnings are resolved where applicable.
+- [ ] Abnahmekriterien sind erfüllt.
+- [ ] Relevante automatisierte Prüfungen sind erfolgreich.
+- [ ] Hardware-Nachweise oder Prüfprotokolle sind verknüpft, sofern zutreffend.
+- [ ] ERC-/DRC- oder Compilerwarnungen sind behoben, sofern zutreffend.
 
-Evidence:
+Nachweise:
 
-## Safety and risk
+## Sicherheit und Risiko
 
-- New or changed failure modes:
-- Rollback or recovery approach:
+- Neue oder geänderte Fehlerarten:
+- Rücksetz- oder Wiederherstellungsverfahren:
 
-## Documentation
+## Dokumentation
 
-- [ ] Interfaces, assumptions, decisions, and user-facing documentation are current.
-- [ ] No credentials, private keys, tokens, or personal data are included.
-
+- [ ] Schnittstellen, Annahmen, Entscheidungen und nutzerorientierte Dokumentation sind aktuell.
+- [ ] Es sind keine Zugangsdaten, privaten Schlüssel, Token oder personenbezogenen Daten enthalten.

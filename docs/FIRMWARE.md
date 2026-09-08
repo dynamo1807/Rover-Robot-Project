@@ -1,100 +1,106 @@
-# Firmware Architecture
+# Firmwarearchitektur
 
-## Objectives
+## Ziele
 
-The firmware must control two motor channels deterministically, capture encoder
-feedback, execute bounded speed controllers, report diagnostics, and remove
-torque safely when a fault or invalid operating state is detected.
+Die Firmware muss zwei Motorkanäle deterministisch steuern, Encoderrückführung
+erfassen, begrenzte Drehzahlregler ausführen, Diagnosedaten melden und bei einem
+Fehler oder ungültigen Betriebszustand das Drehmoment sicher abschalten.
 
-The source tree does not yet contain production firmware. This document defines
-the intended boundaries before implementation begins.
+Der Quellbaum enthält noch keine produktive Firmware. Dieses Dokument legt die
+vorgesehenen Grenzen fest, bevor die Implementierung beginnt.
 
-## Proposed layering
+## Vorgeschlagene Schichten
 
 ```text
-application/     drive modes, commands, future autonomy integration
-control/         speed setpoints, PID, saturation, anti-windup
-estimation/      encoder delta processing, speed and odometry estimates
-safety/          state machine, watchdogs, fault latching, safe stop
-drivers/         motor driver, encoder timer, UART, I2C, GPIO
-platform/        clocks, board support, HAL/LL adaptation, startup
-tests/           host-side unit tests and target integration tests
+application/     Fahrmodi, Befehle, spätere Autonomieintegration
+control/         Drehzahlsollwerte, PID, Sättigung, Anti-Windup
+estimation/      Encoderdifferenzen, Drehzahl- und Odometrieschätzung
+safety/          Zustandsautomat, Watchdogs, Fehlerspeicherung, sicherer Stopp
+drivers/         Motortreiber, Encoder-Timer, UART, I2C, GPIO
+platform/        Takte, Boardunterstützung, HAL-/LL-Anpassung, Systemstart
+tests/           Host-seitige Unit-Tests und Integrationstests auf dem Zielsystem
 ```
 
-Application and control code must not write MCU registers directly. Target-
-specific code stays behind small interfaces so that algorithms can be tested on
-a host where practical.
+Anwendungs- und Regelungscode darf nicht direkt in MCU-Register schreiben.
+Zielspezifischer Code bleibt hinter kleinen Schnittstellen verborgen, damit
+Algorithmen nach Möglichkeit auf einem Entwicklungsrechner getestet werden können.
 
-## Runtime model
+## Laufzeitmodell
 
-The initial firmware uses a fixed-rate control cycle. Exact rates are selected
-from measurement, but the design records:
+Die erste Firmware verwendet einen Regelzyklus mit fester Rate. Die genauen
+Raten werden anhand von Messungen festgelegt. Dokumentiert werden:
 
-- control-loop period and worst-case execution time;
-- encoder sampling interval and overflow behavior;
-- command timeout;
-- telemetry rate and back-pressure behavior;
-- watchdog period and recovery behavior.
+- Regelzyklusdauer und ungünstigste Ausführungszeit;
+- Encoder-Abtastintervall und Überlaufverhalten;
+- Befehlszeitüberschreitung;
+- Telemetrierate und Verhalten bei Rückstau;
+- Watchdog-Zeit und Wiederanlaufverhalten.
 
-Interrupts should capture time-critical events and update bounded state only.
-Formatting, protocol handling, and slow sensor work do not belong in critical
-interrupt paths.
+Interrupts sollen nur zeitkritische Ereignisse erfassen und begrenzte Zustände
+aktualisieren. Formatierung, Protokollverarbeitung und langsame Sensoraufgaben
+gehören nicht in kritische Interruptpfade.
 
-## Safety state machine
+## Sicherheitszustandsautomat
 
 ```mermaid
 stateDiagram-v2
+    state "Systemstart" as Boot
+    state "Deaktiviert" as Disabled
+    state "Freigegeben" as Armed
+    state "In Betrieb" as Running
+    state "Fehler" as Fault
     [*] --> Boot
-    Boot --> Disabled: initialization valid
-    Boot --> Fault: initialization failed
-    Disabled --> Armed: explicit valid arm command
-    Armed --> Running: non-zero valid setpoint
-    Running --> Armed: zero setpoint
-    Armed --> Disabled: disarm or timeout
-    Running --> Fault: driver/supply/watchdog fault
-    Armed --> Fault: driver/supply/watchdog fault
-    Fault --> Disabled: fault cleared and explicit reset
+    Boot --> Disabled: Initialisierung gültig
+    Boot --> Fault: Initialisierung fehlgeschlagen
+    Disabled --> Armed: ausdrücklicher gültiger Freigabebefehl
+    Armed --> Running: gültiger Sollwert ungleich null
+    Running --> Armed: Sollwert null
+    Armed --> Disabled: Sperre oder Zeitüberschreitung
+    Running --> Fault: Treiber-/Versorgungs-/Watchdog-Fehler
+    Armed --> Fault: Treiber-/Versorgungs-/Watchdog-Fehler
+    Fault --> Disabled: Fehler behoben und ausdrücklicher Reset
 ```
 
-Motor outputs default to the disabled state during reset and initialization.
-The safety supervisor has final authority over both motor commands.
+Während Reset und Initialisierung sind die Motorausgänge standardmäßig
+deaktiviert. Die Sicherheitsüberwachung hat die letzte Entscheidungsgewalt über
+beide Motorbefehle.
 
-## Planned modules
+## Geplante Module
 
-| Module | Responsibility | Initial acceptance evidence |
+| Modul | Verantwortung | Anfänglicher Abnahmenachweis |
 | --- | --- | --- |
-| Board support | Clocks, pins, timers, debug UART | Boot log and pin-map review |
-| Motor driver | Direction, PWM, stop mode, fault input | Truth-table target test |
-| Encoder | Quadrature count and delta capture | Direction and maximum-speed test |
-| Speed estimator | Counts to physical units | Logged comparison to reference |
-| PID controller | Bounded wheel-speed control | Step-response report |
-| Safety supervisor | States, timeouts, latched faults | Fault-injection tests |
-| Telemetry | Timestamped commands and measurements | Machine-readable capture |
+| Boardunterstützung | Takte, Pins, Timer, Debug-UART | Startprotokoll und Prüfung der Pinbelegung |
+| Motortreiber | Richtung, PWM, Stoppmodus, Fehlereingang | Prüfung der Wahrheitstabelle am Zielsystem |
+| Encoder | Quadraturzählung und Differenzerfassung | Richtungs- und Höchstdrehzahltest |
+| Drehzahlschätzung | Zählwerte in physikalische Einheiten umrechnen | Protokollierter Vergleich mit Referenz |
+| PID-Regler | Begrenzte Raddrehzahlregelung | Bericht zur Sprungantwort |
+| Sicherheitsüberwachung | Zustände, Zeitüberschreitungen, gespeicherte Fehler | Fehlerinjektionstests |
+| Telemetrie | Befehle und Messwerte mit Zeitstempeln | Maschinenlesbare Aufzeichnung |
 
-## Coding rules
+## Programmierrichtlinien
 
-- Use explicit physical units in identifiers or types where ambiguity is likely.
-- Keep interrupt handlers bounded and non-blocking.
-- Check and propagate initialization failures.
-- Bound every actuator command.
-- Avoid dynamic allocation in the steady-state control path.
-- Document hardware assumptions next to the board configuration.
-- Treat compiler warnings as defects unless a warning is narrowly justified.
+- Eindeutige physikalische Einheiten in Bezeichnern oder Typen verwenden, wenn Verwechslungen möglich sind.
+- Interruptroutinen begrenzt und nicht blockierend halten.
+- Initialisierungsfehler prüfen und weitergeben.
+- Jeden Aktuatorbefehl begrenzen.
+- Im stationären Regelpfad auf dynamische Speicherzuweisung verzichten.
+- Hardwareannahmen unmittelbar an der Boardkonfiguration dokumentieren.
+- Compilerwarnungen als Fehler behandeln, sofern sie nicht eng begrenzt begründet sind.
 
-## Toolchain decision
+## Entscheidung zur Werkzeugkette
 
-The final build and dependency approach is still open. STM32CubeIDE is suitable
-for early target bring-up; a reproducible command-line build and automated host
-tests are preferred for the maintained project. The selected approach must
-document compiler version, generated-code boundaries, formatting, static
-analysis, and CI behavior.
+Der endgültige Build- und Abhängigkeitsansatz ist noch offen. STM32CubeIDE
+eignet sich für die frühe Inbetriebnahme am Zielsystem. Für das dauerhaft
+gepflegte Projekt werden ein reproduzierbarer Kommandozeilen-Build und
+automatisierte Host-Tests bevorzugt. Der gewählte Ansatz muss Compilerversion,
+Grenzen des generierten Codes, Formatierung, statische Analyse und CI-Verhalten
+dokumentieren.
 
-## Verification strategy
+## Verifikationsstrategie
 
-1. Unit-test mathematical and state-machine logic on a host.
-2. Test each low-level driver on the Nucleo bench setup.
-3. Capture structured telemetry for motor and encoder tests.
-4. Inject driver faults, command loss, counter overflow, and invalid inputs.
-5. Repeat target tests on the custom PCB during bring-up.
-6. Store summarized evidence with the relevant issue or test report.
-
+1. Mathematische Logik und Zustandsautomaten auf einem Entwicklungsrechner mit Unit-Tests prüfen.
+2. Jeden Low-Level-Treiber am Nucleo-Prüfaufbau testen.
+3. Strukturierte Telemetrie für Motor- und Encodertests aufzeichnen.
+4. Treiberfehler, Befehlsverlust, Zählerüberlauf und ungültige Eingaben künstlich auslösen.
+5. Zielsystemtests während der Inbetriebnahme auf der eigenen Platine wiederholen.
+6. Zusammengefasste Nachweise beim zugehörigen Issue oder Prüfbericht ablegen.

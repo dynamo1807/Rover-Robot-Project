@@ -1,51 +1,52 @@
-# Engineering Backlog
+# Technischer Backlog
 
-This backlog converts the current design into reviewable work packages. GitHub
-Issues are the execution record; this file preserves the planned order and the
-relationship between workstreams.
+Dieser Backlog gliedert den aktuellen Entwurf in begutachtbare Arbeitspakete.
+GitHub-Issues dienen als Ausführungsnachweis; diese Datei hält die geplante
+Reihenfolge und die Zusammenhänge zwischen den Arbeitsbereichen fest.
 
-Priority meanings:
+Bedeutung der Prioritäten:
 
-- **P0:** blocks a safe or technically defensible next milestone.
-- **P1:** required for the first integrated drive base.
-- **P2:** valuable extension after the baseline is stable.
+- **P0:** blockiert den nächsten sicheren oder technisch belastbaren Meilenstein.
+- **P1:** für die erste integrierte Antriebsbasis erforderlich.
+- **P2:** wertvolle Erweiterung nach Stabilisierung der Ausgangsbasis.
 
-| ID | Priority | Milestone | Work item | Status | GitHub Issue |
+| ID | Priorität | Meilenstein | Arbeitspaket | Status | GitHub-Issue |
 | --- | --- | --- | --- | --- | --- |
-| MR-001 | P0 | M0 | Freeze drive-base requirements and acceptance criteria | Ready | [#1](https://github.com/dynamo1807/Rover-Robot-Project/issues/1) |
-| MR-002 | P0 | M1 | Characterize candidate 12 V encoder gearmotors | Ready | [#2](https://github.com/dynamo1807/Rover-Robot-Project/issues/2) |
-| MR-003 | P0 | M1 | Validate DRV8872 current regulation and thermal margin | Blocked by MR-002 | [#3](https://github.com/dynamo1807/Rover-Robot-Project/issues/3) |
-| MR-004 | P0 | M1 | Freeze battery, protection, and regulator architecture | Ready | [#4](https://github.com/dynamo1807/Rover-Robot-Project/issues/4) |
-| MR-005 | P0 | M1 | Prototype one complete motor and encoder channel on STM32G431 | Blocked by MR-002/004 | [#5](https://github.com/dynamo1807/Rover-Robot-Project/issues/5) |
-| MR-006 | P0 | M2 | Freeze STM32G431 pin, timer, and DMA allocation | Ready | [#6](https://github.com/dynamo1807/Rover-Robot-Project/issues/6) |
-| MR-007 | P0 | M2 | Complete schematic capture, ERC cleanup, and design review | In progress | [#7](https://github.com/dynamo1807/Rover-Robot-Project/issues/7) |
-| MR-008 | P0 | M2 | Route PCB revision A and pass layout review/DRC | Blocked by MR-003/004/006/007 | [#8](https://github.com/dynamo1807/Rover-Robot-Project/issues/8) |
-| MR-009 | P1 | M2 | Produce an orderable BOM and sourcing alternatives | Blocked by MR-007 | [#9](https://github.com/dynamo1807/Rover-Robot-Project/issues/9) |
-| MR-010 | P1 | M3 | Execute current-limited PCB bring-up and record results | Blocked by MR-008/009 | [#10](https://github.com/dynamo1807/Rover-Robot-Project/issues/10) |
-| MR-011 | P1 | M4 | Establish reproducible firmware project and CI checks | Ready | [#11](https://github.com/dynamo1807/Rover-Robot-Project/issues/11) |
-| MR-012 | P1 | M4 | Implement motor driver and deterministic fault handling | Blocked by MR-011 | [#12](https://github.com/dynamo1807/Rover-Robot-Project/issues/12) |
-| MR-013 | P1 | M4 | Implement encoder capture and wheel-speed estimation | Blocked by MR-011 | [#13](https://github.com/dynamo1807/Rover-Robot-Project/issues/13) |
-| MR-014 | P1 | M4 | Implement and tune bounded wheel-speed PID control | Blocked by MR-012/013 | [#14](https://github.com/dynamo1807/Rover-Robot-Project/issues/14) |
-| MR-015 | P1 | M5 | Design and verify the printable drivetrain chassis | Blocked by MR-002/004 | [#15](https://github.com/dynamo1807/Rover-Robot-Project/issues/15) |
-| MR-016 | P2 | M6 | Define and validate IMU/ToF expansion interfaces | Blocked by M4 | [#16](https://github.com/dynamo1807/Rover-Robot-Project/issues/16) |
+| MR-001 | P0 | M0 | Anforderungen und Abnahmekriterien der Antriebsbasis festlegen | Bereit | [#1](https://github.com/dynamo1807/Rover-Robot-Project/issues/1) |
+| MR-002 | P0 | M1 | Mögliche 12-V-Encoder-Getriebemotoren charakterisieren | Bereit | [#2](https://github.com/dynamo1807/Rover-Robot-Project/issues/2) |
+| MR-003 | P0 | M1 | Stromregelung und thermische Reserve des DRV8872 validieren | Blockiert durch MR-002 | [#3](https://github.com/dynamo1807/Rover-Robot-Project/issues/3) |
+| MR-004 | P0 | M1 | Batterie-, Schutz- und Reglerarchitektur festlegen | Bereit | [#4](https://github.com/dynamo1807/Rover-Robot-Project/issues/4) |
+| MR-005 | P0 | M1 | Vollständigen Motor- und Encoderkanal am STM32G431 prototypisch aufbauen | Blockiert durch MR-002/004 | [#5](https://github.com/dynamo1807/Rover-Robot-Project/issues/5) |
+| MR-006 | P0 | M2 | Pin-, Timer- und DMA-Zuordnung des STM32G431 festlegen | Bereit | [#6](https://github.com/dynamo1807/Rover-Robot-Project/issues/6) |
+| MR-007 | P0 | M2 | Schaltplanerfassung, ERC-Bereinigung und Entwurfsprüfung abschließen | In Bearbeitung | [#7](https://github.com/dynamo1807/Rover-Robot-Project/issues/7) |
+| MR-008 | P0 | M2 | Platine Revision A routen und Layoutprüfung/DRC bestehen | Blockiert durch MR-003/004/006/007 | [#8](https://github.com/dynamo1807/Rover-Robot-Project/issues/8) |
+| MR-009 | P1 | M2 | Bestellbare Stückliste und Beschaffungsalternativen erstellen | Blockiert durch MR-007 | [#9](https://github.com/dynamo1807/Rover-Robot-Project/issues/9) |
+| MR-010 | P1 | M3 | Strombegrenzte Platineninbetriebnahme durchführen und Ergebnisse dokumentieren | Blockiert durch MR-008/009 | [#10](https://github.com/dynamo1807/Rover-Robot-Project/issues/10) |
+| MR-011 | P1 | M4 | Reproduzierbares Firmwareprojekt und CI-Prüfungen einrichten | Bereit | [#11](https://github.com/dynamo1807/Rover-Robot-Project/issues/11) |
+| MR-012 | P1 | M4 | Motortreiberansteuerung und deterministische Fehlerbehandlung implementieren | Blockiert durch MR-011 | [#12](https://github.com/dynamo1807/Rover-Robot-Project/issues/12) |
+| MR-013 | P1 | M4 | Encodererfassung und Raddrehzahlschätzung implementieren | Blockiert durch MR-011 | [#13](https://github.com/dynamo1807/Rover-Robot-Project/issues/13) |
+| MR-014 | P1 | M4 | Begrenzte PID-Raddrehzahlregelung implementieren und abstimmen | Blockiert durch MR-012/013 | [#14](https://github.com/dynamo1807/Rover-Robot-Project/issues/14) |
+| MR-015 | P1 | M5 | Druckbares Antriebschassis konstruieren und verifizieren | Blockiert durch MR-002/004 | [#15](https://github.com/dynamo1807/Rover-Robot-Project/issues/15) |
+| MR-016 | P2 | M6 | Erweiterungsschnittstellen für IMU und ToF definieren und validieren | Blockiert durch M4 | [#16](https://github.com/dynamo1807/Rover-Robot-Project/issues/16) |
 
-## Recommended execution order
+## Empfohlene Ausführungsreihenfolge
 
-1. Complete MR-001, MR-002, MR-004, and MR-006 in parallel where possible.
-2. Use those results to finish MR-003, MR-005, and MR-007.
-3. Release the PCB through MR-008 and MR-009.
-4. Bring up hardware with MR-010 while establishing firmware through MR-011.
-5. Complete MR-012 through MR-014 before mechanical endurance testing.
-6. Integrate the chassis in MR-015, then promote MR-016 and autonomy work.
+1. MR-001, MR-002, MR-004 und MR-006 soweit möglich parallel abschließen.
+2. Mit diesen Ergebnissen MR-003, MR-005 und MR-007 fertigstellen.
+3. Die Platine über MR-008 und MR-009 zur Fertigung freigeben.
+4. Die Hardware mit MR-010 in Betrieb nehmen und gleichzeitig mit MR-011 die Firmwarebasis schaffen.
+5. MR-012 bis MR-014 vor den mechanischen Dauertests abschließen.
+6. Das Chassis in MR-015 integrieren und anschließend MR-016 sowie Autonomiearbeiten priorisieren.
 
-## Definition of Ready
+## Startkriterien
 
-An item is ready when it has a clear problem statement, relevant inputs or
-dependencies, bounded scope, measurable acceptance criteria, and no unresolved
-decision that makes the implementation direction arbitrary.
+Ein Arbeitspaket ist bereit, wenn Problemstellung, relevante Eingaben oder
+Abhängigkeiten, begrenzter Umfang und messbare Abnahmekriterien eindeutig sind
+und keine ungeklärte Entscheidung die Umsetzungsrichtung beliebig macht.
 
-## Definition of Done
+## Fertigstellungskriterien
 
-An item is done when its acceptance criteria pass, source artifacts and evidence
-are committed or linked, documentation reflects changed assumptions or
-interfaces, review comments are resolved, and no known P0 safety defect remains.
+Ein Arbeitspaket ist abgeschlossen, wenn seine Abnahmekriterien erfüllt sind,
+Quelldaten und Nachweise committet oder verknüpft wurden, die Dokumentation
+geänderte Annahmen und Schnittstellen wiedergibt, Prüfanmerkungen geklärt sind
+und kein bekannter P0-Sicherheitsfehler verbleibt.

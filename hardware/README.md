@@ -1,22 +1,21 @@
 # Hardware
 
-This directory is the source of truth for rover electronics.
+Dieses Verzeichnis ist die verbindliche Quelle für die Rover-Elektronik.
 
-Planned structure:
+Geplante Struktur:
 
 ```text
 hardware/
-├── pcb/                  KiCad project and custom libraries
-├── bom/                  reviewed BOM and sourcing alternatives
-├── calculations/         power, current, thermal, and protection calculations
-├── manufacturing/        revisioned release outputs
-└── tests/                hardware test procedures and summarized results
+├── pcb/                  KiCad-Projekt und eigene Bibliotheken
+├── bom/                  geprüfte Stückliste und Beschaffungsalternativen
+├── calculations/         Berechnungen zu Leistung, Strom, Thermik und Schutz
+├── manufacturing/        versionierte Fertigungsdaten
+└── tests/                Hardware-Prüfverfahren und zusammengefasste Ergebnisse
 ```
 
-Do not commit generated KiCad backups or editor-local settings. Manufacturing
-outputs must identify the hardware revision and source commit from which they
-were generated.
+Keine erzeugten KiCad-Sicherungen oder lokalen Editoreinstellungen committen.
+Fertigungsdaten müssen die Hardware-Revision und den Quell-Commit nennen, aus
+dem sie erzeugt wurden.
 
-The electrical baseline and PCB release gate are defined in
-[`docs/ELECTRONICS.md`](../docs/ELECTRONICS.md).
-
+Die elektrische Ausgangsbasis und die Freigabekriterien der Platine sind in
+[`docs/ELECTRONICS.md`](../docs/ELECTRONICS.md) festgelegt.

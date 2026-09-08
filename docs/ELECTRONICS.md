@@ -1,68 +1,72 @@
-# Electronics Design
+# Elektronikentwurf
 
-## Design maturity
+## Entwicklungsreife
 
-The electronics are in the schematic and validation phase. The component
-families below form the current baseline, but the design is not ready for PCB
-fabrication until the P0 measurements and reviews are complete.
+Die Elektronik befindet sich in der Schaltplan- und Validierungsphase. Die
+folgenden Bauteilfamilien bilden die aktuelle Ausgangsbasis. Der Entwurf ist
+jedoch erst für die Platinenfertigung bereit, wenn die P0-Messungen und
+Begutachtungen abgeschlossen sind.
 
-## Baseline components
+## Ausgangskomponenten
 
-| Function | Current baseline | Validation required |
+| Funktion | Aktuelle Ausgangsbasis | Erforderliche Validierung |
 | --- | --- | --- |
-| Main MCU | STM32G431CBT6, LQFP-48 | Pin/timer allocation, rail current, clock tree |
-| Prototype MCU | NUCLEO-G431RB or equivalent | Map prototype pins to final MCU peripherals |
-| Motor driver | 2 × DRV8872 | Current regulation, peak current, thermal margin |
-| Motors | 12 V GA25/JGA25-370 class, AB Hall encoder | No-load/stall current, speed, encoder CPR, polarity |
-| Debug | SWD and UART | Connector, pinout, protection, accessibility |
-| Sensors | I2C/GPIO expansion | Voltage, pull-ups, connector, address conflicts |
+| Haupt-MCU | STM32G431CBT6, LQFP-48 | Pin-/Timerzuordnung, Versorgungsstrom, Taktbaum |
+| Prototyp-MCU | NUCLEO-G431RB oder gleichwertig | Prototyppins den Peripheriefunktionen der endgültigen MCU zuordnen |
+| Motortreiber | 2 × DRV8872 | Stromregelung, Spitzenstrom, thermische Reserve |
+| Motoren | 12-V-Klasse GA25/JGA25-370, AB-Hall-Encoder | Leerlauf-/Blockierstrom, Drehzahl, Encoder-CPR, Polarität |
+| Debug | SWD und UART | Steckverbinder, Pinbelegung, Schutz, Zugänglichkeit |
+| Sensoren | I2C-/GPIO-Erweiterung | Spannung, Pull-ups, Steckverbinder, Adresskonflikte |
 
-## Power domains
+## Spannungsbereiche
 
-The current concept contains at least these domains:
+Das aktuelle Konzept enthält mindestens folgende Bereiche:
 
-- a battery input domain;
-- a nominal 12 V motor domain;
-- a logic domain for the STM32;
-- optional sensor rails.
+- einen Batterieeingangsbereich;
+- einen nominellen 12-V-Motorbereich;
+- einen Logikbereich für den STM32;
+- optionale Sensorversorgungen.
 
-The battery system and logic conversion are deliberately **not frozen**. The
-power architecture task must define input range, reverse-polarity protection,
-fuse or current protection, transient suppression, bulk and local decoupling,
-logic regulators, power sequencing, battery monitoring, charging boundaries,
-and a safe power switch.
+Batteriesystem und Logikwandlung sind bewusst **noch nicht festgelegt**. Die
+Aufgabe zur Stromversorgungsarchitektur muss Eingangsspannungsbereich,
+Verpolschutz, Sicherung oder Stromschutz, Transientenunterdrückung, zentrale
+und lokale Entkopplung, Logikregler, Einschaltreihenfolge,
+Batterieüberwachung, Ladegrenzen und einen sicheren Hauptschalter festlegen.
 
-## Motor channels
+## Motorkanäle
 
-Each motor has a dedicated DRV8872 channel. Before the schematic is frozen:
+Jeder Motor besitzt einen eigenen DRV8872-Kanal. Vor Festlegung des Schaltplans:
 
-1. measure motor no-load, loaded, and stall current at the intended voltage;
-2. select and calculate the driver's current-regulation components;
-3. demonstrate that current and thermal limits are acceptable;
-4. verify PWM frequency and input truth-table behavior;
-5. confirm recirculation, braking, coast, and fault behavior;
-6. size copper, connectors, protection, and decoupling for measured current.
+1. Leerlauf-, Last- und Blockierstrom des Motors bei der vorgesehenen Spannung messen;
+2. Bauteile der Treiber-Stromregelung auswählen und berechnen;
+3. nachweisen, dass Strom- und Temperaturgrenzen eingehalten werden;
+4. PWM-Frequenz und Verhalten der Eingangswahrheitstabelle prüfen;
+5. Freilauf-, Brems-, Auslauf- und Fehlerverhalten bestätigen;
+6. Kupferflächen, Steckverbinder, Schutz und Entkopplung nach dem gemessenen Strom dimensionieren.
 
-Motor connectors must not be placed or rated from nominal current alone.
+Motorsteckverbinder dürfen nicht allein anhand des Nennstroms ausgewählt oder
+dimensioniert werden.
 
-## Encoder inputs
+## Encodereingänge
 
-Each motor provides A/B Hall encoder signals. The final interface must document:
+Jeder Motor stellt A/B-Signale eines Hall-Encoders bereit. Für die endgültige
+Schnittstelle müssen folgende Punkte dokumentiert werden:
 
-- encoder supply voltage and output topology;
-- pull-up requirements;
-- pulses/counts per motor and gearbox revolution;
-- legal STM32 input voltage;
-- timer channels and alternate functions;
-- filtering or hysteresis needed for the actual cable length;
-- connector pinout and motor/encoder polarity convention.
+- Versorgungsspannung und Ausgangstopologie des Encoders;
+- Anforderungen an Pull-up-Widerstände;
+- Impulse beziehungsweise Zählwerte pro Motor- und Getriebeumdrehung;
+- zulässige STM32-Eingangsspannung;
+- Timerkanäle und Alternativfunktionen;
+- erforderliche Filterung oder Hysterese für die tatsächliche Kabellänge;
+- Steckerbelegung sowie Polaritätskonvention für Motor und Encoder.
 
-Quadrature timer mode is preferred. A bench test must show correct count sign,
-no missed counts at maximum speed, and stable zero-speed behavior.
+Der Quadraturmodus der Timer wird bevorzugt. Ein Prüfstandsversuch muss das
+korrekte Vorzeichen der Zählung, lückenlose Erfassung bei Höchstdrehzahl und
+stabiles Verhalten bei Drehzahl null nachweisen.
 
-## Schematic conventions
+## Schaltplankonventionen
 
-Use explicit, consistent net names:
+Eindeutige und einheitliche Netznamen verwenden:
 
 ```text
 M1_IN1      M1_IN2      M1_FAULT      ENC1_A      ENC1_B
@@ -70,43 +74,42 @@ M2_IN1      M2_IN2      M2_FAULT      ENC2_A      ENC2_B
 MOTOR_12V   +3V3        GND
 ```
 
-Global-label direction is ERC metadata, not an electrical diode. Mark a label
-as an output where the local circuit drives it and as an input where the local
-circuit receives it.
+Die Richtung eines globalen Labels ist eine ERC-Metainformation und keine
+elektrische Diode. Ein Label als Ausgang kennzeichnen, wenn die lokale Schaltung
+es treibt, und als Eingang, wenn die lokale Schaltung es empfängt.
 
-The DRV8872 `nFAULT` output must not be tied directly to GND. It must connect to
-a named MCU fault input and use the pull-up arrangement required by the selected
-driver configuration.
+Der `nFAULT`-Ausgang des DRV8872 darf nicht direkt mit GND verbunden werden. Er
+muss an einen benannten MCU-Fehlereingang angeschlossen werden und die für die
+gewählte Treiberkonfiguration erforderliche Pull-up-Schaltung verwenden.
 
-Use `PWR_FLAG` only where an external or otherwise passive source actually
-drives a KiCad power net. Do not apply multiple competing names to the same
-power net.
+`PWR_FLAG` nur einsetzen, wenn eine externe oder anderweitig passive Quelle ein
+KiCad-Stromversorgungsnetz tatsächlich speist. Dasselbe Stromversorgungsnetz
+nicht mit mehreren konkurrierenden Namen versehen.
 
-## Minimum MCU support circuitry
+## Mindestbeschaltung der MCU
 
-The final schematic review covers:
+Die abschließende Schaltplanprüfung umfasst:
 
-- every supply and ground pin from the STM32 datasheet;
-- local decoupling and bulk capacitance;
-- reset and boot configuration;
-- SWD connector, ground reference, and optional reset;
-- external clock only if justified;
-- UART debug interface;
-- accessible test points for every rail and critical control signal;
-- unused-pin handling;
-- ESD/transient protection appropriate to external connectors.
+- alle Versorgungs- und Massepins aus dem STM32-Datenblatt;
+- lokale Entkopplungs- und zentrale Pufferkondensatoren;
+- Reset- und Boot-Konfiguration;
+- SWD-Steckverbinder, Massebezug und optionalen Reset;
+- einen externen Takt nur bei nachvollziehbarer Begründung;
+- UART-Debug-Schnittstelle;
+- zugängliche Messpunkte für jede Versorgung und jedes kritische Steuersignal;
+- Behandlung unbenutzter Pins;
+- zu externen Steckverbindern passenden ESD- und Transientenschutz.
 
-## PCB release gate
+## Freigabekriterien für die Platine
 
-The PCB may be released only when:
+Die Platine darf erst freigegeben werden, wenn:
 
-- the motor/driver bench report is attached to its issue;
-- the power budget and worst-case input range are reviewed;
-- all MCU pins and timer resources are allocated;
-- KiCad ERC has no unexplained error or warning;
-- schematic pages have peer/self-review checklists completed;
-- connector pinouts and polarities are documented;
-- PCB design rules and net classes reflect actual currents;
-- the manufacturing BOM contains orderable part numbers and alternatives;
-- the bring-up plan in [VERIFICATION.md](VERIFICATION.md) is actionable.
-
+- der Prüfstandsbericht zu Motor und Treiber am zugehörigen Issue hängt;
+- Leistungsbudget und ungünstigster Eingangsspannungsbereich geprüft sind;
+- alle MCU-Pins und Timerressourcen zugeordnet sind;
+- KiCad ERC keine ungeklärten Fehler oder Warnungen enthält;
+- die Checklisten zur Fremd- oder Eigenprüfung aller Schaltplanseiten abgeschlossen sind;
+- Steckerbelegungen und Polaritäten dokumentiert sind;
+- Platinenregeln und Netzklassen die tatsächlichen Ströme abbilden;
+- die Fertigungsstückliste bestellbare Teilenummern und Alternativen enthält;
+- der Inbetriebnahmeplan in [VERIFICATION.md](VERIFICATION.md) umsetzbar ist.

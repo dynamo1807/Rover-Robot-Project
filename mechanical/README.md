@@ -1,17 +1,17 @@
-# Mechanical Design
+# Mechanische Konstruktion
 
-This directory will contain editable CAD sources, drawings, exported print
-files, assembly notes, and mechanical verification evidence for the rover.
+Dieses Verzeichnis wird editierbare CAD-Quellen, Zeichnungen, exportierte
+Druckdateien, Montagehinweise und mechanische Verifikationsnachweise für den
+Rover enthalten.
 
-The first chassis must define:
+Das erste Chassis muss Folgendes festlegen:
 
-- wheel, axle, and motor geometry;
-- battery and PCB retention;
-- connector and debug access;
-- cable routing and strain relief;
-- cooling around motor drivers and regulators;
-- mounting provisions for future IMU and ToF sensors;
-- print material, orientation, tolerances, and hardware inserts.
+- Geometrie von Rädern, Achsen und Motoren;
+- Befestigung von Batterie und Platine;
+- Zugang zu Steckverbindern und Debug-Schnittstellen;
+- Kabelführung und Zugentlastung;
+- Kühlung im Bereich der Motortreiber und Regler;
+- Befestigungsmöglichkeiten für künftige IMU- und ToF-Sensoren;
+- Druckmaterial, Ausrichtung, Toleranzen und Gewindeeinsätze.
 
-Exported files must identify the CAD revision that produced them.
-
+Exportierte Dateien müssen die CAD-Revision nennen, aus der sie erzeugt wurden.
