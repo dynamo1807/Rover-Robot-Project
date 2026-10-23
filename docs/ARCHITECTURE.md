@@ -118,7 +118,7 @@ retention.
 ## Open architectural decisions
 
 - battery chemistry, cell count, charging strategy, and protection;
-- final motor part number and measured electrical model;
+- measured electrical model and mechanical integration of the selected Zeng WHCD JGB37-520 (12 V / 110 RPM);
 - logic-rail topology and current budgets;
 - exact STM32 pin and timer assignment;
 - firmware build system and HAL/LL split;

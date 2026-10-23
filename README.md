@@ -51,7 +51,7 @@ flowchart LR
 | Controller | STM32G431CBT6 on a custom PCB | Selected; pin map pending |
 | Prototype controller | NUCLEO-G431RB or equivalent G431 board | Planned |
 | Motor drivers | 2 × DRV8872, one channel per motor | Selected; current margin pending |
-| Motors | 2 × 12 V GA25/JGA25-370 class gearmotors with AB Hall encoders, approximately 100–130 rpm | Candidate; characterize before freeze |
+| Motors | 2 × Zeng WHCD JGB37-520 with Hall encoders, 12 V / 110 RPM variant (owner specification) | Selected; characterization and encoder calibration pending |
 | Drive model | Differential drive | Selected |
 | Motor control | PWM/direction, encoder speed estimation, PID speed loop | Planned |
 | Sensors | IMU and ToF expansion over I2C/GPIO | Planned after drive base |
@@ -125,8 +125,8 @@ of Done conventions.
 
 ## Known project risks
 
-- Generic GA25/JGA25-370 motors vary significantly in stall current and encoder
-  characteristics.
+- The selected JGB37-520 motors still require measured stall-current and encoder
+  characteristics for the actual supplied variant.
 - The DRV8872 electrical and thermal margin has not yet been demonstrated with
   the selected motor.
 - Battery topology, charging, protection, and logic-rail conversion are not yet

@@ -13,7 +13,7 @@ fabrication until the P0 measurements and reviews are complete.
 | Main MCU | STM32G431CBT6, LQFP-48 | Pin/timer allocation, rail current, clock tree |
 | Prototype MCU | NUCLEO-G431RB or equivalent | Map prototype pins to final MCU peripherals |
 | Motor driver | 2 × DRV8872 | Current regulation, peak current, thermal margin |
-| Motors | 12 V GA25/JGA25-370 class, AB Hall encoder | No-load/stall current, speed, encoder CPR, polarity |
+| Motors | Zeng WHCD JGB37-520, 12 V / 110 RPM variant with Hall encoder (owner specification) | No-load/stall current, speed, encoder CPR, polarity |
 | Debug | SWD and UART | Connector, pinout, protection, accessibility |
 | Sensors | I2C/GPIO expansion | Voltage, pull-ups, connector, address conflicts |
 
