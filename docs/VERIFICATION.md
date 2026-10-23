@@ -28,6 +28,14 @@ Numerical tolerances for rail voltage, current, temperature, speed error,
 settling time, and endurance duration are set in MR-001 after measurements make
 them defensible.
 
+## Initial bench evidence
+
+Initial evidence for MR-002 is recorded in the
+[Hall encoder measurement report](HALLENCODER_FIRST_MEASUREMENTS.md).
+It contains the supplied sketch and transcribed serial output. The provisional
+3894 counts/revolution factor, physical direction convention, and count-loss
+performance remain unverified; VR-002 and VR-003 are not yet passed.
+
 ## Bench safety checklist
 
 - Use a current-limited laboratory supply for first power-up.
