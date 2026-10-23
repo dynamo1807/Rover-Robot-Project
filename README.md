@@ -63,7 +63,7 @@ flowchart LR
 | Workstream | Status |
 | --- | --- |
 | Requirements and architecture | In progress |
-| Bench prototype | Not started |
+| Bench prototype | Initial Hall encoder measurements recorded; calibration pending |
 | Schematic capture | In progress |
 | PCB layout and fabrication | Not started |
 | Firmware | Not started |
@@ -73,6 +73,14 @@ flowchart LR
 The [roadmap](docs/ROADMAP.md) defines phase exit criteria. The
 [backlog](docs/BACKLOG.md) is the planning source of truth and links every work
 package to its GitHub Issue.
+
+### First Hall encoder measurements
+
+The [initial measurement report](docs/HALLENCODER_FIRST_MEASUREMENTS.md)
+records the supplied Arduino bench sketch, X4 quadrature decoding, and serial
+output approaching -112 RPM with a provisional 3894 counts/revolution factor.
+The factor and its reference shaft still require calibration; this is not yet
+validation of both motors or the planned STM32 implementation (MR-002).
 
 ## Repository structure
 
