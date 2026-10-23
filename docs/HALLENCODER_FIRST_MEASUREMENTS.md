@@ -14,7 +14,7 @@ Erste Auswertung eines Hallencoder-Kanals anhand des bereitgestellten Arduino-Sk
 | Auswerteintervall | mindestens 500000 µs = 500 ms |
 | Serielle Ausgabe | 9600 Baud |
 
-Board, konkrete Motor-ID, Versorgungsspannung, Last, Messdatum und Referenzmessgerät sind nicht angegeben. Ebenso ist noch festzuhalten, ob die Counts pro Umdrehung auf Motorwelle oder Getriebeabtrieb bezogen sind. Der Sketch erfasst einen Motor; getrennte Nachweise für beide Motoren stehen aus. Er steuert den Motor nicht an.
+Der Projekteigner hat den **Zeng WHCD JGB37-520 in der Variante 12 V / 110 RPM mit Hallencoder** ausgewählt (siehe [D-009](DECISIONS.md#d-009--motorauswahl-für-mr-002-2026-10-23)). Diese Angabe beschreibt die ausgewählte Variante, keine unabhängig bestätigte Drehzahl. Board, Zuordnung des gemessenen Exemplars zu M1/M2, tatsächliche Versorgungsspannung im Versuch, Last, Messdatum und Referenzmessgerät sind noch nicht angegeben. Ebenso ist noch festzuhalten, ob die Counts pro Umdrehung auf Motorwelle oder Getriebeabtrieb bezogen sind. Der Sketch erfasst einen Motor; getrennte Nachweise für beide Motoren stehen aus. Er steuert den Motor nicht an.
 
 ## Auswerteverfahren
 

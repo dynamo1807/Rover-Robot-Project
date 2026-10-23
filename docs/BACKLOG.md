@@ -13,7 +13,7 @@ Priority meanings:
 | ID | Priority | Milestone | Work item | Status | GitHub Issue |
 | --- | --- | --- | --- | --- | --- |
 | MR-001 | P0 | M0 | Freeze drive-base requirements and acceptance criteria | Ready | [#1](https://github.com/dynamo1807/Rover-Robot-Project/issues/1) |
-| MR-002 | P0 | M1 | Characterize candidate 12 V encoder gearmotors | Ready | [#2](https://github.com/dynamo1807/Rover-Robot-Project/issues/2) |
+| MR-002 | P0 | M1 | Characterize selected Zeng WHCD JGB37-520, 12 V / 110 RPM | In progress; motor selected, initial encoder measurements recorded | [#2](https://github.com/dynamo1807/Rover-Robot-Project/issues/2) |
 | MR-003 | P0 | M1 | Validate DRV8872 current regulation and thermal margin | Blocked by MR-002 | [#3](https://github.com/dynamo1807/Rover-Robot-Project/issues/3) |
 | MR-004 | P0 | M1 | Freeze battery, protection, and regulator architecture | Ready | [#4](https://github.com/dynamo1807/Rover-Robot-Project/issues/4) |
 | MR-005 | P0 | M1 | Prototype one complete motor and encoder channel on STM32G431 | Blocked by MR-002/004 | [#5](https://github.com/dynamo1807/Rover-Robot-Project/issues/5) |
